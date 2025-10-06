@@ -13,6 +13,7 @@ QuickKart Hub is a fully C-based program designed to provide a seamless shopping
   - Browse and purchase items across multiple categories
   - View product details and related recommendations 
   - Orders are prioritized, especially urgent items
+  - Generate invoices for purchased items directly from the terminal.
 
 - **Admin Panel** 
   - Manage stock and categories 
@@ -60,7 +61,7 @@ git clone https://github.com/divyanshsood22/quickkart-hub.git
   <img src="https://github.com/Shivank-Garg45.png" width="50" height="50" alt="Shivank Garg" style="border-radius:50%;">
 </a>
 <a href="https://github.com/usernameC">
-  <img src="https://github.com/usernameC.png" width="50" height="50" alt="Gaurav" style="border-radius:50%;">
+  <img src="https://github.com/dhruvi-107.png" width="50" height="50" alt="Gaurav" style="border-radius:50%;">
 </a>
 
 
