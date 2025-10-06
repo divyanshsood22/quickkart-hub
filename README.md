@@ -60,7 +60,7 @@ git clone https://github.com/divyanshsood22/quickkart-hub.git
 <a href="https://github.com/Shivank-Garg45">
   <img src="https://github.com/Shivank-Garg45.png" width="50" height="50" alt="Shivank Garg" style="border-radius:50%;">
 </a>
-<a href="https://github.com/usernameC">
+<a href="https://github.com/dhruvi-107">
   <img src="https://github.com/dhruvi-107.png" width="50" height="50" alt="Gaurav" style="border-radius:50%;">
 </a>
 
