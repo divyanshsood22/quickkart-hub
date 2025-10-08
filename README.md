@@ -1,7 +1,7 @@
-
-# 🛒 QuickKart Hub 
-
-Welcome to **QuickKart Hub**!
+<div align="center">
+    <img src="quickkart_hub.png" width="128px" style="max-width:100%;">
+    <h1>QuickKart Hub</h1>
+</div>
 
 QuickKart Hub is a fully C-based program designed to provide a seamless shopping experience across multiple categories, including **grocery**, **electronics**, **medical supplies**, and **clothing**. This project currently runs in the terminal but can be expanded into a full-fledged website in the future.
 
