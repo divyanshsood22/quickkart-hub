@@ -6,7 +6,7 @@
 #define MAX_LEN 200
 
 void addProductToTextFileInteractive() {
-    FILE *file = fopen("products_extra.txt", "a");
+    FILE *file = fopen("panels/products_extra.txt", "a");
     if (file == NULL) {
         printf("Error opening file!\n");
         return;

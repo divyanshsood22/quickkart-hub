@@ -11,7 +11,7 @@
 #define MAX_WISHLIST 10
 #define MAX_FEEDBACK 10
 #define MAX_ADMINS 3
-#define BILLS_FILE "bills.txt"
+#define BILLS_FILE "invoices/ledger.txt"
 
 typedef struct Product {
     int id;
