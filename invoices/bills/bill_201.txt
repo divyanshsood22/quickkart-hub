@@ -1,0 +1,52 @@
+
+=================================================
+                  QUICKKARTHUB BILL
+=================================================
+Date/Time    : 2025-11-10 14:31:40
+Order ID     : 1
+Customer ID  : 201
+Customer Name: vansh
+-------------------------------------------------
+Product Details:
+  Product Name  : lower
+  Product ID    : 109
+  Unit Price    : 500.00
+  Discount      : 5%
+  Final Price   : 475.00
+  Quantity      : 30
+-------------------------------------------------
+Subtotal (after discount): 14250.00
+GST (18%)                : 2565.00
+-------------------------------------------------
+TOTAL PAYABLE            : 16815.00
+=================================================
+Thank you for shopping with QuickKartHub!
+Visit again soon!
+=================================================
+
+
+=================================================
+                  QUICKKARTHUB BILL
+=================================================
+Date/Time    : 2025-11-10 14:45:46
+Order ID     : 2
+Customer ID  : 201
+Customer Name: vansh
+-------------------------------------------------
+Product Details:
+  Product Name  : lower
+  Product ID    : 109
+  Unit Price    : 500.00
+  Discount      : 5%
+  Final Price   : 475.00
+  Quantity      : 5
+-------------------------------------------------
+Subtotal (after discount): 2375.00
+GST (18%)                : 427.50
+-------------------------------------------------
+TOTAL PAYABLE            : 2802.50
+=================================================
+Thank you for shopping with QuickKartHub!
+Visit again soon!
+=================================================
+

@@ -1,0 +1,52 @@
+
+=================================================
+                  QUICKKARTHUB BILL
+=================================================
+Date/Time    : 2025-11-10 14:49:58
+Order ID     : 1
+Customer ID  : 199
+Customer Name: Lakshay
+-------------------------------------------------
+Product Details:
+  Product Name  : shirt
+  Product ID    : 101
+  Unit Price    : 10000.00
+  Discount      : 10%
+  Final Price   : 9000.00
+  Quantity      : 1
+-------------------------------------------------
+Subtotal (after discount): 9000.00
+GST (18%)                : 1620.00
+-------------------------------------------------
+TOTAL PAYABLE            : 10620.00
+=================================================
+Thank you for shopping with QuickKartHub!
+Visit again soon!
+=================================================
+
+
+=================================================
+                  QUICKKARTHUB BILL
+=================================================
+Date/Time    : 2025-11-10 14:52:24
+Order ID     : 2
+Customer ID  : 199
+Customer Name: Lakshay
+-------------------------------------------------
+Product Details:
+  Product Name  : lower
+  Product ID    : 109
+  Unit Price    : 500.00
+  Discount      : 5%
+  Final Price   : 475.00
+  Quantity      : 2
+-------------------------------------------------
+Subtotal (after discount): 950.00
+GST (18%)                : 171.00
+-------------------------------------------------
+TOTAL PAYABLE            : 1121.00
+=================================================
+Thank you for shopping with QuickKartHub!
+Visit again soon!
+=================================================
+
