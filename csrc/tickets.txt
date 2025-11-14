@@ -1,0 +1,2 @@
+1|3|Need help with my order|2|open
+2|1|Product missing from stock|1|open
