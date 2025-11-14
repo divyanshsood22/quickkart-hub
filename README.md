@@ -1,37 +1,48 @@
 <div align="center">
-    <img src="quickkart_hub.png" width="128px" style="max-width:100%;">
+    <img src="web\quickkart\core\static\logo.png" width="128px" style="max-width:100%;">
     <h1>QuickKart Hub</h1>
 </div>
 
-QuickKart Hub is a fully C-based program designed to provide a seamless shopping experience across multiple categories, including **grocery**, **electronics**, **medical supplies**, and **clothing**. This project currently runs in the terminal but can be expanded into a full-fledged website in the future.
+QuickKart Hub is a hybrid **C + Django** project designed to simulate a functional e-commerce platform.  
+All core business logic (products, users, orders, invoices, recommendations, tickets) is fully implemented in **C**, while **Django + Tailwind CSS** provides a clean modern web interface.
 
+This project was built as a college project to demonstrate:
+- Use of **C for backend logic**
+- Integration with **Python/Django** through `ctypes`
+- A complete working e-commerce flow
 
+<br>
 
-## ✨ Features 
+## ✨ Features
 
-- **User Panel** 
-  - Browse and purchase items across multiple categories
-  - View product details and related recommendations 
-  - Orders are prioritized, especially urgent items
-  - Generate invoices for purchased items directly from the terminal.
+### 🛒 **User Panel**
+- Browse products with details
+- Add products to cart
+- Manage cart and checkout
+- Automatic invoice generation
+- Product recommendation system (C-based)
 
-- **Admin Panel** 
-  - Manage stock and categories 
-  - Add, update, or remove products 
-  - Monitor order statuses and prioritize urgent requests 
+### 🎛️ **Admin Panel**
+- Dashboard with quick stats
+- View all users, products, and orders
+- Manage stock via C functions
 
-- **Support Panel** 
-  - Customer assistance with ticket system 
-  - Ticket prioritization to address urgent issues first 
-  - Track ticket history and resolution status 
+### 💬 **Support System**
+- Raise support tickets  
+- Support team replies (C-based message thread)
+- Auto-closing of tickets after support response
+- View ticket history
 
-- **Recommendation System** 
-  - Suggest related products to enhance user experience 
-  - Improve sales by providing relevant product recommendations 
+### ⚙️ **Core Built in C**
+- Products, Users, Orders, Inventory
+- File-based data handling
+- Order prioritization
+- Ticket management
+- Recommendation engine
 
+<br>
 
-
-## 🛠️ Installation 
+## 🛠️ Installation
 
 Clone the repository:
 
@@ -39,34 +50,19 @@ Clone the repository:
 git clone https://github.com/divyanshsood22/quickkart-hub.git
 ```
 
+Run Django server:
 
+```bash
+cd quickkart-hub/web/quickkart
+python manage.py runserver
+```
+C Compilation:
+```
+cd quickkart-hub/csrc
+gcc -shared -o build/quickkart.dll products.c users.c orders.c invoice.c recommendation.c tickets.c ticket_replies.c utils.c inventory.c -I .
+```
+<br>
 
-## 🚧 Future Improvements 
-
-- Make QuickKartHub run as a web application instead of terminal-based 
-- Add features like bar-code scanning for faster product management 
-- Full-stack integration with database support 
-- Payment gateway integration 
-- Enhanced recommendation algorithms using AI 
-- Mobile-responsive design for better accessibility 
-
-
-
-## 👥 Contributors 
-
-<a href="https://github.com/Lakshay3010">
-  <img src="https://github.com/Lakshay3010.png" width="50" height="50" alt="Lakshay Verma" style="border-radius:50%;">
-</a>
-<a href="https://github.com/Shivank-Garg45">
-  <img src="https://github.com/Shivank-Garg45.png" width="50" height="50" alt="Shivank Garg" style="border-radius:50%;">
-</a>
-<a href="https://github.com/dhruvi-107">
-  <img src="https://github.com/dhruvi-107.png" width="50" height="50" alt="Gaurav" style="border-radius:50%;">
-</a>
-
-
-
-
-## 📝 License 
-
-This project is licensed under the Unlicense License. See the [LICENSE](LICENSE) file for details.
+## 📝 License
+This project is licensed under the Unlicense License.
+See the [LICENSE](LICENSE) file for more details.
