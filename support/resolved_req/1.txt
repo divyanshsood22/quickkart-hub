@@ -1,7 +1,0 @@
-Name = Divyansh Sood
-Issue = I was checkiing your website and found that one item is on stock but when I added it to cart it said that
-Item not in stock
-Kindly look into this
-
-Response = Sorry for the inconvinience it'll be sorted up by tomorrow.
-

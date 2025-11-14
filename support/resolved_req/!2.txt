@@ -1,6 +1,0 @@
-Name = Mayank Bisht
-Issue = I just ordered few groceries but when I did the payment of $500 the transaction passed but the order didn't confirmed.
-I would really appreciate if I can get a refund.
-
-Response = hey, thanks for visitng us. I'll surely look into this and you'll get a refund by tonight. 
-
