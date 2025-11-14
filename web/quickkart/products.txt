@@ -1,0 +1,6 @@
+1|Milk|30.00|6
+2|Shirt|399.00|49
+3|Mango|59.00|50
+4|Masala Chips|20.00|25
+5|Moong Dal|60.00|15
+6|Jacket|2000.00|10
