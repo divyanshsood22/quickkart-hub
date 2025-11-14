@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QuickKartHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="/static/favicon.png">
+
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- NAVBAR -->
+    <nav class="bg-indigo-600 text-white p-4 flex justify-between items-center shadow">
+        <h1 class="text-xl font-semibold">QuickKartHub</h1>
+        <div class="space-x-4">
+            <a href="/products/" class="hover:underline">Products</a>
+            <a href="/users/" class="hover:underline">Users</a>
+            <a href="/cart/" class="hover:underline">Cart</a>
+            <a href="/orders/" class="hover:underline">Orders</a>
+            <a href="/support/" class="hover:underline">Support</a>
+            <a href="/admin-dashboard/" class="hover:underline">Dashboard</a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="max-w-4xl mx-auto p-6">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

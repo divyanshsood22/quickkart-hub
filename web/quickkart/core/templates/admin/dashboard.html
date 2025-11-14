@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-3xl font-bold mb-6">Admin Dashboard</h1>
+
+<!-- STATS CARDS -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+
+    <div class="bg-white p-6 rounded shadow text-center">
+        <h3 class="text-gray-600">Total Products</h3>
+        <p class="text-3xl font-bold">{{ total_products }}</p>
+    </div>
+
+    <div class="bg-white p-6 rounded shadow text-center">
+        <h3 class="text-gray-600">Total Users</h3>
+        <p class="text-3xl font-bold">{{ total_users }}</p>
+    </div>
+
+    <div class="bg-white p-6 rounded shadow text-center">
+        <h3 class="text-gray-600">Total Orders</h3>
+        <p class="text-3xl font-bold">{{ total_orders }}</p>
+    </div>
+
+</div>
+
+<!-- LOW STOCK -->
+<h2 class="text-2xl font-semibold mb-3">Low Stock Items</h2>
+{% if low_stock_items %}
+<ul class="space-y-3 mb-8">
+    {% for p in low_stock_items %}
+        <li class="bg-red-100 p-4 rounded shadow flex justify-between">
+            <span class="font-semibold">{{ p.name }}</span>
+            <span class="text-red-700">Stock: {{ p.stock }}</span>
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="text-gray-600 mb-8">No low-stock items.</p>
+{% endif %}
+
+<!-- RECENT ORDERS -->
+<h2 class="text-2xl font-semibold mb-3">Recent Orders</h2>
+
+{% if recent_orders %}
+<ul class="space-y-3">
+    {% for o in recent_orders %}
+        <li class="bg-white p-4 rounded shadow">
+            <a class="text-indigo-700 font-semibold" href="/orders/{{ o.order_id }}/">
+                Order #{{ o.order_id }}
+            </a>
+            — User: {{ o.user_id }}
+            — Product: {{ o.product_id }}
+            — Qty: {{ o.quantity }}
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="text-gray-600">No orders yet.</p>
+{% endif %}
+
+{% endblock %}

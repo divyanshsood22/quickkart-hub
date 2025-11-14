@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-2xl font-bold mb-4">Users</h2>
+
+<a href="/users/add/" class="bg-indigo-600 text-white px-4 py-2 rounded">Add User</a>
+
+<ul class="mt-4 space-y-2">
+    {% for u in users %}
+        <li class="bg-white p-4 rounded shadow">
+            {{ u.name }} — {{ u.email }}
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

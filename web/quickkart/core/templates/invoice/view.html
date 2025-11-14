@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-3xl font-bold mb-4">Invoice</h1>
+
+<pre class="bg-white p-6 rounded shadow text-sm whitespace-pre-wrap">
+{{ invoice }}
+</pre>
+
+<a href="/products/" class="text-indigo-600 mt-4 inline-block">Back to Products</a>
+
+{% endblock %}

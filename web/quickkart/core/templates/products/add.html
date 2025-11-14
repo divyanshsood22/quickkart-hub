@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-2xl font-bold mb-4">Add Product</h2>
+
+<form method="POST" class="bg-white p-6 rounded shadow space-y-4">
+    {% csrf_token %}
+
+    <div>
+        <label>Name</label>
+        <input name="name" class="border p-2 w-full" required>
+    </div>
+
+    <div>
+        <label>Price</label>
+        <input name="price" type="number" class="border p-2 w-full" step="0.01" required>
+    </div>
+
+    <div>
+        <label>Stock</label>
+        <input name="stock" type="number" class="border p-2 w-full" required>
+    </div>
+
+    <button class="bg-indigo-600 text-white px-4 py-2 rounded">Add Product</button>
+</form>
+
+{% endblock %}

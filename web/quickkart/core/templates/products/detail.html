@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-3xl font-bold mb-2">{{ product.name }}</h1>
+
+<p class="text-xl mb-2">Price: ₹{{ product.price }}</p>
+<p class="text-gray-600 mb-4">Stock: {{ product.stock }}</p>
+
+{% if product.stock > 0 %}
+    <a href="/cart/add/{{ product.id }}/"
+       class="bg-green-600 text-white px-4 py-2 rounded">
+       Add to Cart
+    </a>
+{% else %}
+    <button class="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed" disabled>
+        Out of Stock
+    </button>
+{% endif %}
+
+<h3 class="text-xl font-semibold mt-6">Recommended Products</h3>
+
+<ul class="mt-2">
+    {% for r in recommendations %}
+        <li>
+            <a href="/products/{{ r.id }}/" class="text-indigo-600">
+                {{ r.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

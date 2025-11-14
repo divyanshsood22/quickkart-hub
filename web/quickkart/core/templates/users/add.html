@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-2xl font-bold mb-4">Add User</h2>
+
+<form method="POST" class="bg-white p-6 rounded shadow space-y-4">
+    {% csrf_token %}
+
+    <div>
+        <label>Name</label>
+        <input name="name" class="border p-2 w-full" required>
+    </div>
+
+    <div>
+        <label>Email</label>
+        <input name="email" type="email" class="border p-2 w-full" required>
+    </div>
+
+    <button class="bg-indigo-600 text-white px-4 py-2 rounded">Add</button>
+</form>
+
+{% endblock %}

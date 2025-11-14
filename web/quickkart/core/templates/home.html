@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center py-10">
+    <img src="/static/logo.png" alt="QuickKartHub Logo" class="w-32 h-32 mx-auto mb-6">
+
+    <h1 class="text-4xl font-bold mb-4">Welcome to QuickKartHub</h1>
+
+    <p class="text-gray-700 text-lg mb-8">
+        A C-powered e-commerce system with a modern Django & Tailwind interface.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl mx-auto">
+
+        <a href="/products/"
+           class="bg-indigo-600 text-white p-6 rounded shadow hover:bg-indigo-700">
+           🛒 Browse Products
+        </a>
+
+        <a href="/users/"
+           class="bg-indigo-600 text-white p-6 rounded shadow hover:bg-indigo-700">
+           👤 Manage Users
+        </a>
+
+        <a href="/cart/"
+           class="bg-indigo-600 text-white p-6 rounded shadow hover:bg-indigo-700">
+           🧺 View Cart
+        </a>
+
+        <a href="/admin-dashboard/"
+           class="bg-indigo-600 text-white p-6 rounded shadow hover:bg-indigo-700">
+           📊 Admin Dashboard
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}

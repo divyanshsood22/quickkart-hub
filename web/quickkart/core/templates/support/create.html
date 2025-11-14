@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-2xl font-bold mb-4">Create Support Ticket</h2>
+
+<form method="POST" class="bg-white p-6 rounded shadow space-y-4">
+    {% csrf_token %}
+
+    <div>
+        <label class="block font-medium">User</label>
+        <select name="user_id" class="border p-2 w-full">
+            <option value="0">Guest / No user</option>
+            {% for u in users %}
+            <option value="{{ u.id }}">{{ u.name }} ({{ u.email }})</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        <label class="block font-medium">Priority</label>
+        <select name="priority" class="border p-2 w-full">
+            <option value="1">Low</option>
+            <option value="2">Medium</option>
+            <option value="3">High</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="block font-medium">Message</label>
+        <textarea name="message" rows="4" class="border p-2 w-full" required></textarea>
+    </div>
+
+    <button class="bg-indigo-600 text-white px-4 py-2 rounded">Submit Ticket</button>
+</form>
+
+{% endblock %}

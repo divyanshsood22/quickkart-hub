@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-2xl font-bold mb-4">Order Details</h2>
+
+<div class="bg-white p-6 rounded shadow space-y-2">
+    <p><strong>Order ID:</strong> {{ order.order_id }}</p>
+    <p><strong>User ID:</strong> {{ order.user_id }}</p>
+    <p><strong>Product ID:</strong> {{ order.product_id }}</p>
+    <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+    <p><strong>Total Price:</strong> ₹{{ order.total }}</p>
+</div>
+
+<a href="/invoice/{{ order.order_id }}/" class="inline-block bg-green-600 text-white px-4 py-2 rounded mt-4">
+    View Invoice
+</a>
+
+{% endblock %}
