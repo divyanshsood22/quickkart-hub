@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center w-full max-w-3xl">
+
+    <h1 class="text-3xl font-bold text-gray-900 mb-10 text-center">
+        Admin Dashboard
+    </h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <a href="/admin/products/" class="p-8 bg-white rounded-2xl shadow hover:shadow-xl transition">
+            <div class="text-4xl mb-3 text-indigo-600">📦</div>
+            <h2 class="text-xl font-semibold text-gray-900">Manage Products</h2>
+            <p class="text-gray-600 mt-2 text-sm">Add / update / remove items</p>
+        </a>
+
+        <a href="/admin/support/" class="p-8 bg-white rounded-2xl shadow hover:shadow-xl transition">
+            <div class="text-4xl mb-3 text-indigo-600">🎫</div>
+            <h2 class="text-xl font-semibold text-gray-900">Support Tickets</h2>
+            <p class="text-gray-600 mt-2 text-sm">Pending & resolved requests</p>
+        </a>
+
+        <a href="/admin/invoices/" class="p-8 bg-white rounded-2xl shadow hover:shadow-xl transition">
+            <div class="text-4xl mb-3 text-indigo-600">🧾</div>
+            <h2 class="text-xl font-semibold text-gray-900">Invoices</h2>
+            <p class="text-gray-600 mt-2 text-sm">View all generated invoices</p>
+        </a>
+
+    </div>
+
+</div>
+{% endblock %}
