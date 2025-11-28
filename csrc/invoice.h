@@ -1,6 +1,7 @@
 #ifndef INVOICE_H
 #define INVOICE_H
+#include "export.h"
 
-char* generate_invoice(int order_id);
+EXPORT char* generate_invoice(int order_id);
 
 #endif

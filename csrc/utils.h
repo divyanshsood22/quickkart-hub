@@ -1,6 +1,8 @@
+/* utils.h */
 #ifndef UTILS_H
 #define UTILS_H
+#include "export.h"
 
-char* str_duplicate(const char* src);
+EXPORT char* str_duplicate(const char* src);
 
 #endif

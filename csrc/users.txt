@@ -1,2 +1,0 @@
-1|John Doe|john@gmail.com
-2|Divyansh|divyansh@gmail.com

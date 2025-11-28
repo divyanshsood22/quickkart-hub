@@ -1,80 +1,88 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
+#include "ticket_replies.h"
+#include "export.h"
 
-#define REPLY_FILE "ticket_replies.txt"
+#define REPLIES_FILE "D:/quickkart-hub/web/quickkart/ticket_replies.txt"
 
-// REPLY_ID|TICKET_ID|MESSAGE|ROLE|TIMESTAMP
-
-char* tr_strdup(const char* s) {
+// Safe strdup
+static char* sdup(const char* s) {
+    if (!s) return NULL;
     char* d = malloc(strlen(s) + 1);
     strcpy(d, s);
     return d;
 }
 
-char* current_timestamp() {
-    time_t now = time(NULL);
-    struct tm* t = localtime(&now);
+/*
+   reply_ticket(ticket_id, admin_name, message)
 
-    static char buffer[50];
-    sprintf(buffer, "%04d-%02d-%02d %02d:%02d:%02d",
-            t->tm_year + 1900, t->tm_mon + 1, t->tm_mday,
-            t->tm_hour, t->tm_min, t->tm_sec);
-
-    return buffer;
-}
-
-int reply_ticket(int ticket_id, const char* message, const char* role) {
-    FILE* fp = fopen(REPLY_FILE, "a");
+   reply file format:
+   ticket_id|admin_name|message
+*/
+EXPORT int reply_ticket(int ticket_id, const char* admin_name, const char* message)
+{
+    FILE* fp = fopen(REPLIES_FILE, "a");
     if (!fp) return -1;
 
-    int reply_id = 1;
-
-    FILE* read = fopen(REPLY_FILE, "r");
-    if (read) {
-        char line[600];
-        while (fgets(line, sizeof(line), read)) reply_id++;
-        fclose(read);
-    }
-
-    fprintf(fp, "%d|%d|%s|%s|%s\n",
-            reply_id, ticket_id, message, role, current_timestamp());
-
+    fprintf(fp, "%d|%s|%s\n", ticket_id, admin_name, message);
     fclose(fp);
-    return reply_id;
+
+    return 1;
 }
 
-char* list_replies(int ticket_id) {
-    FILE* fp = fopen(REPLY_FILE, "r");
-    if (!fp) return tr_strdup("[]");
+/*
+   list_replies(ticket_id)
 
-    char buffer[20000] = "[";
-    char line[600];
+   Returns JSON:
+   [
+     {"admin":"Support","message":"We are checking"},
+     {"admin":"Support2","message":"Issue resolved"}
+   ]
+*/
+EXPORT char* list_replies(int ticket_id)
+{
+    FILE* fp = fopen(REPLIES_FILE, "r");
+    if (!fp) return sdup("[]");
+
+    size_t cap = 4096;
+    char* json = malloc(cap);
+    json[0] = 0;
+
+    strcat(json, "[");
+
+    char line[1024];
     int first = 1;
 
     while (fgets(line, sizeof(line), fp)) {
-        int rid, tid;
-        char message[400], role[50], time[60];
+        int tid;
+        char admin[200], msg[700];
 
-        sscanf(line, "%d|%d|%[^|]|%[^|]|%s", &rid, &tid, message, role, time);
+        if (sscanf(line, "%d|%199[^|]|%699[^\n]",
+                   &tid, admin, msg) != 3)
+            continue;
 
-        if (tid == ticket_id) {
-            if (!first) strcat(buffer, ",");
-            first = 0;
+        if (tid != ticket_id)
+            continue;
 
-            char item[500];
-            sprintf(item,
-                "{\"reply_id\":%d,\"ticket_id\":%d,\"message\":\"%s\","
-                "\"role\":\"%s\",\"time\":\"%s\"}",
-                rid, tid, message, role, time);
+        if (!first) strcat(json, ",");
+        first = 0;
 
-            strcat(buffer, item);
+        char entry[1200];
+        snprintf(entry, sizeof(entry),
+                 "{\"admin\":\"%s\",\"message\":\"%s\"}",
+                  admin, msg);
+
+        if (strlen(json) + strlen(entry) + 50 > cap) {
+            cap *= 2;
+            json = realloc(json, cap);
         }
+
+        strcat(json, entry);
     }
 
     fclose(fp);
-    strcat(buffer, "]");
+    strcat(json, "]");
 
-    return tr_strdup("[]");
+    return json;
 }

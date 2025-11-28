@@ -2,101 +2,134 @@
 #include <stdlib.h>
 #include <string.h>
 #include "tickets.h"
+#include "export.h"
 
-#define TICKET_FILE "tickets.txt"
+#define TICKETS_FILE "D:/quickkart-hub/web/quickkart/tickets.txt"
 
-// TICKET_ID|USER_ID|MESSAGE|PRIORITY|STATUS
-
-char* tstrdup(const char* s) {
+// ---- safe strdup ----
+static char* sdup(const char* s) {
+    if (!s) return NULL;
     char* d = malloc(strlen(s) + 1);
     strcpy(d, s);
     return d;
 }
 
-int create_ticket(int user_id, const char* message, int priority) {
-    FILE* fp = fopen(TICKET_FILE, "a");
+// ---- create ticket ----
+// FORMAT: id|user_id|message|priority|status
+// Example: 1|5|Hello I need help|1|open
+EXPORT int create_ticket(int user_id, const char* message, int priority)
+{
+    FILE* fp = fopen(TICKETS_FILE, "a+");
     if (!fp) return -1;
 
-    int ticket_id = 1;
-
-    FILE* read = fopen(TICKET_FILE, "r");
-    if (read) {
-        char line[600];
-        while (fgets(line, sizeof(line), read)) ticket_id++;
-        fclose(read);
-    }
-
-    fprintf(fp, "%d|%d|%s|%d|open\n", ticket_id, user_id, message, priority);
-    fclose(fp);
-
-    return ticket_id;
-}
-
-char* list_tickets() {
-    FILE* fp = fopen(TICKET_FILE, "r");
-    if (!fp) return tstrdup("[]");
-
-    char buffer[10000] = "[";
-    char line[600];
-    int first = 1;
+    // find last id
+    int id = 0;
+    char line[1024];
 
     while (fgets(line, sizeof(line), fp)) {
-        int id, user_id, priority;
-        char message[300], status[50];
+        int tid;
+        if (sscanf(line, "%d|", &tid) == 1) {
+            if (tid > id) id = tid;
+        }
+    }
 
-        sscanf(line, "%d|%d|%[^|]|%d|%s", &id, &user_id, message, &priority, status);
+    id += 1;
 
-        if (!first) strcat(buffer, ",");
+    // append new ticket
+    fprintf(fp, "%d|%d|%s|%d|open\n", id, user_id, message, priority);
+    fclose(fp);
+
+    return id;
+}
+
+// ---- list tickets for a user ----
+// returns JSON: [{id:1, message:"...", priority:0, status:"open"}, ...]
+EXPORT char* list_tickets(int user_id)
+{
+    FILE* fp = fopen(TICKETS_FILE, "r");
+    if (!fp) return sdup("[]");
+
+    size_t cap = 4096;
+    char* json = malloc(cap);
+    json[0] = 0;
+
+    strcat(json, "[");
+
+    int first = 1;
+    char line[1024];
+
+    while (fgets(line, sizeof(line), fp)) {
+        int tid, uid, priority;
+        char message[600], status[50];
+
+        if (sscanf(line, "%d|%d|%599[^|]|%d|%49s",
+                   &tid, &uid, message, &priority, status) != 5)
+            continue;
+
+        if (uid != user_id) continue; // show ONLY user's own tickets
+
+        if (!first) strcat(json, ",");
         first = 0;
 
-        char item[400];
-        sprintf(item,
-            "{\"ticket_id\":%d,\"user_id\":%d,\"message\":\"%s\","
+        char entry[1200];
+        snprintf(entry, sizeof(entry),
+            "{\"id\":%d,\"user_id\":%d,\"message\":\"%s\","
             "\"priority\":%d,\"status\":\"%s\"}",
-            id, user_id, message, priority, status);
+            tid, uid, message, priority, status);
 
-        strcat(buffer, item);
+        // extend if needed
+        if (strlen(json) + strlen(entry) + 100 > cap) {
+            cap *= 2;
+            json = realloc(json, cap);
+        }
+
+        strcat(json, entry);
     }
 
     fclose(fp);
-    strcat(buffer, "]");
 
-    return tstrdup(buffer);
+    strcat(json, "]");
+    return json;
 }
 
-int close_ticket(int ticket_id) {
-    FILE* fp = fopen(TICKET_FILE, "r");
+
+// ---- close ticket ----
+EXPORT int close_ticket(int ticket_id)
+{
+    FILE* fp = fopen(TICKETS_FILE, "r");
     if (!fp) return -1;
 
-    FILE* temp = fopen("tickets_tmp.txt", "w");
-    if (!temp) {
-        fclose(fp);
-        return -1;
-    }
+    FILE* tmp = fopen("tickets_tmp.txt", "w");
+    if (!tmp) { fclose(fp); return -1; }
 
-    char line[600];
-    int closed = 0;
+    char line[1024];
+    int found = 0;
 
     while (fgets(line, sizeof(line), fp)) {
-        int id, user_id, priority;
-        char message[300], status[50];
+        int tid, uid, priority;
+        char message[600], status[50];
 
-        sscanf(line, "%d|%d|%[^|]|%d|%s", &id, &user_id, message, &priority, status);
+        if (sscanf(line, "%d|%d|%599[^|]|%d|%49s",
+                   &tid, &uid, message, &priority, status) != 5)
+        {
+            fputs(line, tmp);
+            continue;
+        }
 
-        if (id == ticket_id) {
-            fprintf(temp, "%d|%d|%s|%d|closed\n",
-                    id, user_id, message, priority);
-            closed = 1;
+        if (tid == ticket_id) {
+            found = 1;
+            fprintf(tmp, "%d|%d|%s|%d|closed\n",
+                    tid, uid, message, priority);
         } else {
-            fputs(line, temp);
+            fputs(line, tmp);
         }
     }
 
     fclose(fp);
-    fclose(temp);
+    fclose(tmp);
 
-    remove(TICKET_FILE);
-    rename("tickets_tmp.txt", TICKET_FILE);
+    remove(TICKETS_FILE);
+    rename("tickets_tmp.txt", TICKETS_FILE);
 
-    return closed ? 1 : 0;
+    return found ? 1 : 0;
 }
