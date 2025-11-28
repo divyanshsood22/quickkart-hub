@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="w-full max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
+
+    <h1 class="text-3xl font-bold mb-6">Your Tickets</h1>
+
+    {% if tickets %}
+        {% for t in tickets %}
+
+            <div class="p-4 rounded-lg mb-4
+                {% if t.priority == 'high' %}
+                    bg-red-100
+                {% else %}
+                    bg-gray-100
+                {% endif %}
+            ">
+
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="font-semibold">#{{ t.id }} — {{ t.message }}</p>
+
+                        <p class="text-sm mt-1">
+                            Status:
+                            {% if t.status == 'open' %}
+                                <span class="text-yellow-600 font-semibold">Pending</span>
+                            {% else %}
+                                <span class="text-green-600 font-semibold">Resolved</span>
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <a href="/support/ticket/{{ t.id }}/"
+                       class="text-indigo-600 font-semibold">
+                        View
+                    </a>
+                </div>
+
+            </div>
+
+        {% endfor %}
+    {% else %}
+        <p class="text-gray-500 text-center mt-4">No tickets found.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

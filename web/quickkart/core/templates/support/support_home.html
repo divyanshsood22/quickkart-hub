@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="w-full max-w-3xl mx-auto bg-white p-8 rounded-xl shadow">
+
+    <h1 class="text-3xl font-bold mb-6">Support Center</h1>
+
+    <div class="space-y-4">
+
+        <a href="/support/create/"
+           class="block w-full bg-indigo-600 text-white text-center py-3 rounded-xl font-semibold">
+            Create a New Ticket
+        </a>
+
+        <a href="/support/my/"
+           class="block w-full bg-gray-700 text-white text-center py-3 rounded-xl font-semibold">
+            View Your Tickets
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

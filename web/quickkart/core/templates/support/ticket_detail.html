@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="w-full max-w-3xl mx-auto bg-white p-8 rounded-xl shadow">
+
+    <h1 class="text-3xl font-bold mb-6">Ticket #{{ ticket.id }}</h1>
+
+    <p><strong>Name:</strong> {{ ticket.user_name }}</p>
+    <p><strong>Priority:</strong> {{ ticket.priority }}</p>
+
+    <p><strong>Status:</strong>
+        {% if ticket.status == 'open' %}
+            <span class="text-yellow-600 font-semibold">Pending</span>
+        {% else %}
+            <span class="text-green-600 font-semibold">Resolved</span>
+        {% endif %}
+    </p>
+
+    <hr class="my-5">
+
+    <h2 class="text-xl font-bold mb-2">Your Message</h2>
+    <p class="mb-4">{{ ticket.message }}</p>
+
+    <h2 class="text-xl font-bold mb-2">Support Response</h2>
+
+    {% if reply %}
+        <div class="p-4 bg-gray-100 rounded-lg">
+            {{ reply }}
+        </div>
+    {% else %}
+        <p class="text-gray-500">Pending response…</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}
