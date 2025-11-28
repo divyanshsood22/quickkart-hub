@@ -2,30 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>QuickKartHub</title>
+    <title>QuickKart Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="/static/favicon.png">
-
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <div class="w-full p-4 flex justify-end">
+        {% if request.session.user_name %}
+            <span class="mr-4 text-gray-700">
+                Hi, {{ request.session.user_name }}
+            </span>
+            <a href="/logout/" class="bg-indigo-600 text-white px-4 py-2 rounded">
+                Logout
+            </a>
+        {% else %}
+            <a href="/login/" class="bg-indigo-600 text-white px-4 py-2 rounded">
+                Login
+            </a>
+        {% endif %}
+    </div>
 
-    <!-- NAVBAR -->
-    <nav class="bg-indigo-600 text-white p-4 flex justify-between items-center shadow">
-        <h1 class="text-xl font-semibold">QuickKartHub</h1>
-        <div class="space-x-4">
-            <a href="/products/" class="hover:underline">Products</a>
-            <a href="/users/" class="hover:underline">Users</a>
-            <a href="/cart/" class="hover:underline">Cart</a>
-            <a href="/orders/" class="hover:underline">Orders</a>
-            <a href="/support/" class="hover:underline">Support</a>
-            <a href="/admin-dashboard/" class="hover:underline">Dashboard</a>
-        </div>
-    </nav>
-
-    <!-- MAIN CONTENT -->
-    <div class="max-w-4xl mx-auto p-6">
-        {% block content %}{% endblock %}
+    <div class="flex-grow flex justify-center items-center p-6">
+        {% block content %}
+        {% endblock %}
     </div>
 
 </body>
