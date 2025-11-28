@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="w-full max-w-4xl bg-white p-10 rounded-xl shadow">
+  <h1 class="text-3xl font-bold mb-6">All Invoices</h1>
+
+  {% if groups %}
+    {% for g in groups %}
+      <div class="flex justify-between items-center bg-gray-100 p-4 rounded mb-3">
+        <div>
+          <span class="font-semibold">Order Group #{{ g.group_id }}</span>
+          {% if g.user_id is not none and g.user_id != -1 and g.user_id != 0 %}
+            <span class="text-gray-600"> — User {{ g.user_id }}</span>
+          {% endif %}
+        </div>
+        <a href="/admin/invoices/{{ g.group_id }}/" class="text-indigo-600 font-semibold">View</a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="text-gray-500 text-center mt-4">No invoices found.</p>
+  {% endif %}
+</div>
+{% endblock %}

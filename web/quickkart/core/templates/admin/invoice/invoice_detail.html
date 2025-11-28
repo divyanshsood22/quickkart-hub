@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="w-full max-w-4xl bg-white p-8 rounded-xl shadow">
+  <h1 class="text-2xl font-bold mb-4">Invoice — Order Group #{{ order_id }}</h1>
+
+  {% if items %}
+  <table class="w-full border-collapse mb-6">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="p-3 border text-left">Product</th>
+        <th class="p-3 border text-right">Price</th>
+        <th class="p-3 border text-center">Quantity</th>
+        <th class="p-3 border text-right">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for it in items %}
+      <tr>
+        <td class="border p-3">{{ it.name }}</td>
+        <td class="border p-3 text-right">₹{{ it.price }}</td>
+        <td class="border p-3 text-center">{{ it.quantity }}</td>
+        <td class="border p-3 text-right">₹{{ it.total }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="text-right font-semibold p-3 border">Grand total</td>
+        <td class="text-right font-semibold p-3 border">₹{{ grand_total }}</td>
+      </tr>
+    </tfoot>
+  </table>
+  {% else %}
+    <p class="text-gray-500">No items found for this order.</p>
+  {% endif %}
+
+  <a href="/admin/invoices/" class="inline-block bg-blue-200 px-4 py-2 rounded">Back to invoices</a>
+</div>
+{% endblock %}
