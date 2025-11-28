@@ -1,37 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="w-full max-w-3xl bg-white p-10 rounded-2xl shadow">
 
-<h1 class="text-3xl font-bold mb-4">Checkout</h1>
+    <h2 class="text-3xl font-bold text-indigo-600 mb-8 text-center">Checkout</h2>
 
-{% if not items %}
-    <p>Your cart is empty.</p>
-    <a href="/products/" class="text-indigo-600">Continue Shopping</a>
-{% else %}
-
-<h2 class="text-xl font-semibold mb-2">Your Items</h2>
-
-<ul class="space-y-2 mb-4">
-    {% for item in items %}
-        <li class="bg-white p-4 rounded shadow">
-            {{ item.name }} — ₹{{ item.price }} × {{ item.quantity }} = <strong>₹{{ item.total }}</strong>
-        </li>
-    {% endfor %}
-</ul>
-
-<h2 class="text-xl font-semibold mb-2">Select User</h2>
-
-<form method="POST" action="/place-order/" class="space-y-4 bg-white p-6 rounded shadow">
-    {% csrf_token %}
-
-    <select name="user" class="border p-2 w-full">
-        {% for u in users %}
-            <option value="{{ u.id }}">{{ u.name }} ({{ u.email }})</option>
+    <div class="space-y-4">
+        {% for item in items %}
+        <div class="flex justify-between border-b pb-3">
+            <p>{{ item.name }} (x{{ item.quantity }})</p>
+            <p>₹{{ item.total }}</p>
+        </div>
         {% endfor %}
-    </select>
+    </div>
 
-    <button class="bg-green-600 text-white px-4 py-2 rounded">Place Order</button>
-</form>
+    <form method="POST" action="/place-order/" class="mt-8 text-center">
+        {% csrf_token %}
+        <button class="px-6 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition">
+            Confirm Order
+        </button>
+    </form>
 
-{% endif %}
-
+</div>
 {% endblock %}
