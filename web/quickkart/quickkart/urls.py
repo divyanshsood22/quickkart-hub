@@ -1,48 +1,74 @@
 from django.contrib import admin
 from django.urls import path
-from core.views import product_list, product_add, product_detail
-from core.views import user_list, user_add
-from core.views import cart_add, cart_view, cart_remove
-from core.views import checkout, place_order
-from core.views import invoice_view
-from core.views import order_list, user_orders, order_detail
-from core.views import admin_dashboard
-from core.views import home
-from core.views import support_list, support_create, support_close
-from core.views import ticket_detail, ticket_reply
-
+from core import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    # Products
-    path("products/", product_list),
-    path("products/add/", product_add),
-    path("products/<int:pid>/", product_detail),
-    # Users
-    path("users/", user_list),
-    path("users/add/", user_add),
-    # URLs
-    path("cart/", cart_view),
-    path("cart/add/<int:pid>/", cart_add),
-    path("cart/remove/<int:pid>/", cart_remove),
-    # Checkout
-    path("checkout/", checkout),
-    path("place-order/", place_order),
-    # Invoice
-    path("invoice/<int:oid>/", invoice_view),
-    # Orders
-    path("orders/", order_list),
-    path("orders/user/<int:uid>/", user_orders),
-    path("orders/<int:oid>/", order_detail),
-    # Admin
-    path("admin-dashboard/", admin_dashboard),
-    # Homepage
-    path("", home),
-    # SUPPORT / TICKETS
-    path("support/", support_list),
-    path("support/create/", support_create),
-    path("support/close/<int:tid>/", support_close),
-    path("support/<int:tid>/", ticket_detail),
-path("support/<int:tid>/reply/", ticket_reply),
-
+    # LOGIN
+    path("", views.home_redirect),
+    path("login/", views.login_choice),
+    path("login/user/", views.login_user),
+    path("login/admin/", views.login_admin),
+    path("logout/", views.logout_view),
+    # USER HOME
+    path("home/", views.user_home),
+    # ADMIN HOME
+    path("admin-home/", views.admin_home),
+    # PRODUCTS ADMIN
+    path("admin/products/", views.products_list),
+    path("admin/products/add/", views.product_add),
+    # REMOVE PRODUCT
+    path("admin/products/remove/", views.product_remove, name="product_remove"),
+    # UPDATE PAGES
+    path(
+        "admin/products/stock/<int:pid>/",
+        views.product_update_stock_page,
+        name="update_stock_page",
+    ),
+    path(
+        "admin/products/price/<int:pid>/",
+        views.product_update_price_page,
+        name="update_price_page",
+    ),
+    # UPDATE ACTIONS
+    path(
+        "admin/products/update-stock/", views.product_update_stock, name="update_stock"
+    ),
+    path(
+        "admin/products/update-price/", views.product_update_price, name="update_price"
+    ),
+    # FRONTEND PRODUCT DETAIL
+    path("products/<int:pid>/", views.product_detail),
+    # CART
+    path("cart/", views.cart_view),
+    path("cart/add/<int:pid>/", views.cart_add),
+    path("cart/remove/<int:pid>/", views.cart_remove),
+    # CHECKOUT + INVOICE
+    path("checkout/", views.checkout),
+    path("place-order/", views.place_order),
+    path("invoice/<int:gid>/", views.invoice_view),
+    # SUPPORT (USER)
+    path("support/", views.support_home),
+    path("support/create/", views.support_create),
+    path("support/my/", views.support_my),
+    path("support/ticket/<int:tid>/", views.ticket_detail),
+    path("support/ticket/<int:tid>/reply/", views.ticket_reply),
+    # DJANGO BUILT-IN ADMIN
+    path("django-admin/", admin.site.urls),
+    # SUPPORT (ADMIN)
+    path("admin/support/", views.admin_support_list),
+    path("admin/support/pending/", views.admin_support_pending),
+    path("admin/support/resolved/", views.admin_support_resolved),
+    path("admin/support/search/", views.admin_support_search),
+    path("admin/support/<int:tid>/", views.admin_support_detail),
+    path("admin/support/<int:tid>/reply/", views.admin_support_reply),
+    # ADMIN INVOICES
+    path("admin/invoices/", views.admin_invoice_list),
+    path("admin/invoices/<int:group_id>/", views.admin_invoice_detail),
+    path("products/", views.user_products_list, name="user_products_list"),
+    path("products/<int:pid>/", views.product_detail),
+    path("cart/", views.cart_view),
+    path("cart/add/<int:pid>/", views.cart_add),
+    path("cart/remove/<int:pid>/", views.cart_remove),
+    path("checkout/", views.checkout),
+    path("place-order/", views.place_order),
 ]
