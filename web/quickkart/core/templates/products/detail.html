@@ -1,32 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 class="text-3xl font-bold mb-2">{{ product.name }}</h1>
+<div class="max-w-4xl mx-auto p-6">
 
-<p class="text-xl mb-2">Price: ₹{{ product.price }}</p>
-<p class="text-gray-600 mb-4">Stock: {{ product.stock }}</p>
+    <div class="bg-white shadow p-6 rounded-xl">
+        <div class="flex flex-col md:flex-row gap-8">
 
-{% if product.stock > 0 %}
-    <a href="/cart/add/{{ product.id }}/"
-       class="bg-green-600 text-white px-4 py-2 rounded">
-       Add to Cart
-    </a>
-{% else %}
-    <button class="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed" disabled>
-        Out of Stock
-    </button>
-{% endif %}
+            <div class="flex-1">
+                <h1 class="text-3xl font-bold">{{ product.name }}</h1>
 
-<h3 class="text-xl font-semibold mt-6">Recommended Products</h3>
+                <p class="text-indigo-600 text-2xl font-bold mt-2">₹{{ product.price }}</p>
 
-<ul class="mt-2">
-    {% for r in recommendations %}
-        <li>
-            <a href="/products/{{ r.id }}/" class="text-indigo-600">
-                {{ r.name }}
-            </a>
-        </li>
-    {% endfor %}
-</ul>
+                <p class="text-gray-600 mt-2">Available Stock: {{ product.stock }}</p>
+
+                <p class="mt-4 text-gray-700">
+                    Category:
+                    <span class="font-semibold text-gray-900">{{ product.category }}</span>
+                </p>
+
+                <!-- Quantity + Add to Cart -->
+                <form action="/cart/add/{{ product.id }}/" method="post" class="mt-6 flex items-center gap-4">
+                    {% csrf_token %}
+
+                    <div>
+                        <label class="font-semibold">Quantity:</label>
+                        <input type="number"
+                               name="qty"
+                               min="1"
+                               max="{{ product.stock }}"
+                               value="1"
+                               class="w-20 px-3 py-2 border rounded-lg text-center" required>
+                    </div>
+
+                    <button type="submit"
+                            class="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700">
+                        Add to Cart
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
 
 {% endblock %}
