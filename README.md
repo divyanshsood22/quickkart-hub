@@ -59,7 +59,7 @@ python manage.py runserver
 C Compilation:
 ```
 cd quickkart-hub/csrc
-gcc -shared -o build/quickkart.dll products.c users.c orders.c invoice.c recommendation.c tickets.c ticket_replies.c utils.c inventory.c -I .
+gcc -shared -o build/quickkart.dll quickkart.dll products.c users.c orders.c invoice.c recommendation.c tickets.c ticket_replies.c utils.c inventory.c -I .
 ```
 <br>
 
