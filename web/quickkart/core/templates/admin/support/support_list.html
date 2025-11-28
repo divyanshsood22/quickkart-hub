@@ -1,0 +1,23 @@
+{% extends "admin_base.html" %}
+{% block content %}
+
+<div class="w-full max-w-5xl mx-auto bg-white p-8 rounded-xl shadow">
+
+    <h1 class="text-3xl font-bold mb-6">All Tickets</h1>
+
+    {% if tickets %}
+        {% for t in tickets %}
+            <a href="/admin/support/ticket/{{ t.id }}/">
+                <div class="p-4 rounded-lg mb-4 cursor-pointer bg-gray-100">
+                    <p class="font-semibold">#{{ t.id }} — {{ t.message }}</p>
+                    <p class="text-sm text-gray-600">Status: {{ t.status }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <p class="text-gray-500">No tickets found.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

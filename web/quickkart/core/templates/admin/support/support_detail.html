@@ -1,0 +1,50 @@
+{% extends "admin_base.html" %}
+{% block content %}
+
+<div class="w-full max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
+
+    <h1 class="text-3xl font-bold mb-6">Ticket #{{ ticket.id }}</h1>
+
+    <p><strong>User:</strong> {{ ticket.user_name }}</p>
+    <p><strong>Priority:</strong> {{ ticket.priority }}</p>
+
+    <p><strong>Status:</strong>
+        {% if ticket.status == 'open' %}
+            <span class="text-yellow-600 font-semibold">Pending</span>
+        {% else %}
+            <span class="text-green-600 font-semibold">Resolved</span>
+        {% endif %}
+    </p>
+
+    <hr class="my-5">
+
+    <h2 class="text-xl font-bold mb-2">User Message</h2>
+    <p class="mb-4">{{ ticket.message }}</p>
+
+    <h2 class="text-xl font-bold mb-2">Support Response</h2>
+
+    {% if reply %}
+        <div class="p-4 bg-gray-100 rounded-lg mb-6">
+            {{ reply }}
+        </div>
+    {% else %}
+        <p class="text-gray-500 mb-4">No response yet.</p>
+    {% endif %}
+
+    {% if ticket.status == 'open' %}
+        <form method="POST">
+            {% csrf_token %}
+
+            <textarea name="reply" rows="4"
+                      class="w-full border p-3 rounded mb-4"
+                      placeholder="Write your response..." required></textarea>
+
+            <button class="bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold">
+                Send Reply & Close Ticket
+            </button>
+        </form>
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "admin_base.html" %}
+{% block content %}
+
+<div class="w-full max-w-5xl mx-auto bg-white p-8 rounded-xl shadow">
+
+    <h1 class="text-3xl font-bold mb-6">Pending Tickets</h1>
+
+    {% if tickets %}
+        {% for t in tickets %}
+            <a href="/admin/support/ticket/{{ t.id }}/">
+                <div class="p-4 rounded-lg mb-4 cursor-pointer
+                    {% if t.priority == 'high' %}
+                        bg-red-100
+                    {% else %}
+                        bg-gray-100
+                    {% endif %}
+                ">
+
+                    <p class="text-lg font-semibold">#{{ t.id }} — {{ t.message }}</p>
+
+                    <p class="text-sm text-gray-700 mt-1">
+                        From: <strong>{{ t.user_name }}</strong>
+                    </p>
+
+                </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <p class="text-gray-500 text-center">No pending tickets.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "admin_base.html" %}
+{% block content %}
+
+<div class="w-full max-w-3xl mx-auto bg-white p-8 rounded-xl shadow">
+
+    <h1 class="text-3xl font-bold mb-6">Search Ticket</h1>
+
+    <form method="GET" class="mb-6">
+        <input type="number" name="id" class="w-full border p-3 rounded mb-4"
+               placeholder="Enter ticket ID..." required>
+
+        <button class="bg-indigo-600 text-white px-6 py-3 rounded-xl w-full font-semibold">
+            Search
+        </button>
+    </form>
+
+    {% if ticket %}
+        <hr class="my-5">
+
+        <h2 class="text-xl font-bold mb-2">Ticket #{{ ticket.id }}</h2>
+
+        <p><strong>User:</strong> {{ ticket.user_name }}</p>
+        <p><strong>Priority:</strong> {{ ticket.priority }}</p>
+        <p><strong>Status:</strong> {{ ticket.status }}</p>
+
+        <p class="mt-4"><strong>Message:</strong></p>
+        <p>{{ ticket.message }}</p>
+
+        <p class="mt-4"><strong>Support Reply:</strong></p>
+        {% if reply %}
+            <div class="p-4 bg-gray-100 rounded-lg">{{ reply }}</div>
+        {% else %}
+            <p class="text-gray-500">No reply yet.</p>
+        {% endif %}
+    {% elif searched %}
+        <p class="text-red-500 text-center text-lg">No ticket found with that ID.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}
