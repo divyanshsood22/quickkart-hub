@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-md w-full bg-white p-8 rounded-xl shadow text-center">
+
+    <h1 class="text-2xl font-bold mb-6">Remove Product</h1>
+
+    <p class="mb-4">Are you sure you want to remove this product?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button class="w-full bg-red-600 text-white py-3 rounded-xl">
+            Confirm Remove
+        </button>
+    </form>
+
+</div>
+{% endblock %}

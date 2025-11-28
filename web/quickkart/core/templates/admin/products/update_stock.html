@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="w-full max-w-lg bg-white p-8 rounded-xl shadow mx-auto mt-10">
+
+    <h2 class="text-2xl font-bold mb-4">Update Stock for {{ product.name }}</h2>
+
+    <form method="POST" action="/admin/products/update-stock/">
+        {% csrf_token %}
+
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+
+        <label class="block text-gray-700 mb-2">New Stock</label>
+        <input type="number" name="new_stock"
+               class="w-full border p-3 rounded-xl"
+               placeholder="Enter new stock"
+               required>
+
+        <button class="w-full mt-4 bg-indigo-600 text-white py-3 rounded-xl font-semibold">
+            Update Stock
+        </button>
+    </form>
+
+</div>
+
+{% endblock %}

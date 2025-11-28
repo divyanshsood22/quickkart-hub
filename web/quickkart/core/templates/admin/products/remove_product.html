@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="w-full max-w-lg bg-white p-10 rounded-xl shadow mx-auto">
+
+    <h2 class="text-2xl font-bold mb-4">Remove Product</h2>
+
+    <p class="mb-4">Are you sure you want to delete product {{ pid }}?</p>
+
+    <form method="POST" action="/admin/products/remove/?id={{ pid }}">
+        {% csrf_token %}
+        <button class="bg-red-600 text-white px-6 py-2 rounded-xl">Delete</button>
+    </form>
+
+</div>
+{% endblock %}
