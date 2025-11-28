@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="w-full max-w-4xl mx-auto text-center">
+
+    <!-- Welcome Text -->
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">
+        Welcome, {{ request.session.user_name }} 👋
+    </h1>
+
+    <!-- Dashboard Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- PRODUCTS -->
+        <a href="/products/"
+           class="p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-[1.02]">
+            <div class="text-indigo-600 mb-4 text-5xl">🛒</div>
+            <h2 class="text-xl font-semibold text-gray-900">Products</h2>
+            <p class="text-gray-600 mt-2">Browse & explore items</p>
+        </a>
+
+        <!-- CART -->
+        <a href="/cart/"
+           class="p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-[1.02]">
+            <div class="text-indigo-600 mb-4 text-5xl">🛍️</div>
+            <h2 class="text-xl font-semibold text-gray-900">Your Cart</h2>
+            <p class="text-gray-600 mt-2">View items before checkout</p>
+        </a>
+
+        <!-- SUPPORT -->
+        <a href="/support/"
+           class="p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-[1.02]">
+            <div class="text-indigo-600 mb-4 text-5xl">💬</div>
+            <h2 class="text-xl font-semibold text-gray-900">Support</h2>
+            <p class="text-gray-600 mt-2">Create or view tickets</p>
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}
