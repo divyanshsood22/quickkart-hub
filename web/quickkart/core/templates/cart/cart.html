@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="w-full max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
+
+    <h1 class="text-3xl font-bold mb-6">Your Cart</h1>
+
+    {% if items %}
+    <table class="w-full border-collapse mb-6">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="p-3 border">Item</th>
+                <th class="p-3 border">Price</th>
+                <th class="p-3 border">Qty</th>
+                <th class="p-3 border">Total</th>
+                <th class="p-3 border">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for p in items %}
+            <tr class="text-center">
+                <td class="border p-3">{{ p.name }}</td>
+                <td class="border p-3">₹{{ p.price }}</td>
+                <td class="border p-3">{{ p.quantity }}</td>
+                <td class="border p-3 font-semibold">₹{{ p.total }}</td>
+                <td class="border p-3">
+                    <a href="/cart/remove/{{ p.id }}/"
+                       class="text-red-600 font-semibold">Remove</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/checkout/" class="w-full bg-indigo-600 text-white py-3 px-6 rounded-xl block text-center">
+        Proceed to Checkout →
+    </a>
+
+    {% else %}
+    <p class="text-gray-500 text-center text-lg">Your cart is empty.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}
