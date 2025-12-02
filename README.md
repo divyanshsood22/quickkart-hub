@@ -20,7 +20,7 @@ This project was built as a college project to demonstrate:
 - Add products to cart
 - Manage cart and checkout
 - Automatic invoice generation
-- Product recommendation system (C-based)
+- Product recommendation system
 
 ### 🎛️ **Admin Panel**
 - Dashboard with quick stats
@@ -54,12 +54,13 @@ Run Django server:
 
 ```bash
 cd quickkart-hub/web/quickkart
+python manage.py migrate
 python manage.py runserver
 ```
 C Compilation:
 ```
 cd quickkart-hub/csrc
-gcc -shared -o build/quickkart.dll quickkart.dll products.c users.c orders.c invoice.c recommendation.c tickets.c ticket_replies.c utils.c inventory.c -I .
+gcc -shared -o quickkart.dll products.c users.c orders.c invoice.c recommendation.c tickets.c ticket_replies.c utils.c inventory.c -I .
 ```
 <br>
 
